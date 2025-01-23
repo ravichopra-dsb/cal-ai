@@ -1,0 +1,21 @@
+{
+  "name": "cal-ai",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.1.0",
+    "@hono/node-server": "^1.13.7",
+    "ai": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "googleapis": "^144.0.0",
+    "hono": "^4.6.17",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.14",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
