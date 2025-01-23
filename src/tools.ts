@@ -62,3 +62,19 @@ export const checkSlotAvailabilityTool = tool({
     return await checkSlotAvailability({ startTime, endTime });
   },
 });
+
+export const getCurrentDateTool = tool({
+  parameters: z.object({}),
+  description: "Get the current date in the format YYYY-MM-DD",
+  execute: async (): Promise<string> => {
+    return getCurrentDate();
+  },
+});
+
+export const getCurrentDate = () => {
+  // gets the current date in the below format
+  // 2025-01-28T09:00:00-07:00
+  const date = new Date();
+  const formattedDate = date.toISOString();
+  return formattedDate;
+};

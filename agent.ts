@@ -3,6 +3,7 @@ import { streamText, type CoreMessage } from "ai";
 import {
     checkSlotAvailabilityTool,
     createEventTool,
+    getCurrentDateTool,
     listEventsTool,
 } from "./src/tools.js";
 
@@ -21,16 +22,21 @@ const model = openai("gpt-4-turbo");
 const messages: CoreMessage[] = [];
 
 const askAQuestion = async (prompt: string) => {
+  const message: CoreMessage = {
+    role: "user",
+    content: prompt,
+  };
+  messages.push(message);
     const { textStream } = await streamText({
     model,
-    prompt,
     maxSteps:4,
     messages,
-    system:process.env.SYSTEM_PROMPT ||  "You are a helpful assistant.",
+    system:process.env.SYSTEM_PROMPT,
     tools: {
       listEventsTool,
       checkSlotAvailabilityTool,
       createEventTool,
+      getCurrentDateTool
     },
   });
 

@@ -12,6 +12,8 @@ const calendar = google.calendar("v3");
 // Type Definitions
 type Auth = Awaited<ReturnType<typeof authenticate>>;
 
+const calendarId = process.env.CALENDAR_ID;
+
 // Authentication Function
 export async function authenticate() {
   const auth = new google.auth.GoogleAuth({
@@ -26,7 +28,7 @@ export async function listEvents(params: listEventsToolParams) {
   const auth = await authenticate();
   const res = await calendar.events.list({
     auth,
-    calendarId: "primary",
+    calendarId: calendarId,
     timeMin: new Date().toISOString(),
     maxResults: params.maxResults || 10,
     singleEvents: true,
@@ -86,7 +88,7 @@ export async function createEvent(params: createEventToolParams) {
   try {
     const response = await calendar.events.insert({
       auth,
-      calendarId: "ravi.chopra@designingsolutions.co.in",
+      calendarId: calendarId,
       resource: event,
     });
 
@@ -102,7 +104,7 @@ export async function checkSlotAvailability(params: checkSlotAvailabilityToolPar
   const auth = await authenticate();
   const response = await calendar.events.list({
     auth,
-    calendarId: "ravi.chopra@designingsolutions.co.in",
+    calendarId: calendarId,
     timeMin: params.startTime,
     timeMax: params.endTime,
     singleEvents: true,
